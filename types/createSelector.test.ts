@@ -43,6 +43,11 @@ createSelector(
   contactIdSelector,
   areEqual
 );
+// $ExpectType OutputParametricInstanceSelector<{ selectedContact: string; }, PropsA, boolean>
+createSelector(
+  [getSelectedContactId, contactIdSelector],
+  areEqual
+);
 
 // $ExpectType OutputParametricInstanceSelector<{ selectedContact: string; }, PropsA, boolean>
 createSelector(
@@ -82,3 +87,10 @@ const inst_companyHasContact = createSelector(
 );
 // $ExpectType true
 type ICHC_IS_RIGHT = typeof inst_companyHasContact extends OutputParametricInstanceSelector<State, PropsA & PropsB, boolean> ? true : false;
+
+const inst_arr_companyHasContact = createSelector(
+  [getContactById, getCompany],
+  (contact, company) => company.employees.indexOf(contact.name) >= 0
+);
+// $ExpectType true
+type IACHC_IS_RIGHT = typeof inst_arr_companyHasContact extends OutputParametricInstanceSelector<State, PropsA & PropsB, boolean> ? true : false;

@@ -197,13 +197,23 @@ export function createSelector<S1, S2, S3, P1, P2, P3, R1, R2, R3, T>(
   combiner: (res1: R1, res2: R2, res3: R3) => T,
 ): OutputParametricSelector<S1 & S2 & S3, P1 & P2 & P3, T>;
 
-/* array argument */
-
+/* tuple argument */
 /* one selector */
+export function createSelector<S1, R1, T>(
+  selectors: [InstanceSelector<S1, R1>],
+  combiner: (res1: R1) => T,
+): OutputInstanceSelector<S1, T>;
+
 export function createSelector<S1, R1, T>(
   selectors: [Selector<S1, R1>],
   combiner: (res1: R1) => T,
 ): OutputSelector<S1, T>;
+
+export function createSelector<S1, P1, R1, T>(
+  selectors: [ParametricInstanceSelector<S1, P1, R1>],
+  combiner: (res1: R1) => T,
+): OutputParametricInstanceSelector<S1, P1, T>;
+
 export function createSelector<S1, P1, R1, T>(
   selectors: [ParametricSelector<S1, P1, R1>],
   combiner: (res1: R1) => T,
@@ -211,9 +221,28 @@ export function createSelector<S1, P1, R1, T>(
 
 /* two selector */
 export function createSelector<S1, S2, R1, R2, T>(
+  selectors: [InstanceSelector<S1, R1>, MaybeInstanceSelector<S2, R2>],
+  combiner: (res1: R1, res2: R2) => T,
+): OutputInstanceSelector<S1 & S2, T>;
+export function createSelector<S1, S2, R1, R2, T>(
+  selectors: [MaybeInstanceSelector<S1, R1>, InstanceSelector<S2, R2>],
+  combiner: (res1: R1, res2: R2) => T,
+): OutputInstanceSelector<S1 & S2, T>;
+
+export function createSelector<S1, S2, R1, R2, T>(
   selectors: [Selector<S1, R1>, Selector<S2, R2>],
   combiner: (res1: R1, res2: R2) => T,
 ): OutputSelector<S1 & S2, T>;
+
+export function createSelector<S1, S2, P1, P2, R1, R2, T>(
+  selectors: [ParametricInstanceSelector<S1, P1, R1>, MaybeParametricInstanceSelector<S2, P2, R2>],
+  combiner: (res1: R1, res2: R2) => T,
+): OutputParametricInstanceSelector<S1 & S2, P1 & P2, T>;
+export function createSelector<S1, S2, P1, P2, R1, R2, T>(
+  selectors: [MaybeParametricInstanceSelector<S1, P1, R1>, ParametricInstanceSelector<S2, P2, R2>],
+  combiner: (res1: R1, res2: R2) => T,
+): OutputParametricInstanceSelector<S1 & S2, P1 & P2, T>;
+
 export function createSelector<S1, S2, P1, P2, R1, R2, T>(
   selectors: [ParametricSelector<S1, P1, R1>, ParametricSelector<S2, P2, R2>],
   combiner: (res1: R1, res2: R2) => T,
@@ -221,9 +250,36 @@ export function createSelector<S1, S2, P1, P2, R1, R2, T>(
 
 /* three selector */
 export function createSelector<S1, S2, S3, R1, R2, R3, T>(
+  selectors: [InstanceSelector<S1, R1>, MaybeInstanceSelector<S2, R2>, MaybeInstanceSelector<S3, R3>],
+  combiner: (res1: R1, res2: R2, res3: R3) => T,
+): OutputInstanceSelector<S1 & S2 & S3, T>;
+export function createSelector<S1, S2, S3, R1, R2, R3, T>(
+  selectors: [MaybeInstanceSelector<S1, R1>, InstanceSelector<S2, R2>, MaybeInstanceSelector<S3, R3>],
+  combiner: (res1: R1, res2: R2, res3: R3) => T,
+): OutputInstanceSelector<S1 & S2 & S3, T>;
+export function createSelector<S1, S2, S3, R1, R2, R3, T>(
+  selectors: [MaybeInstanceSelector<S1, R1>, MaybeInstanceSelector<S2, R2>, InstanceSelector<S3, R3>],
+  combiner: (res1: R1, res2: R2, res3: R3) => T,
+): OutputInstanceSelector<S1 & S2 & S3, T>;
+
+export function createSelector<S1, S2, S3, R1, R2, R3, T>(
   selectors: [Selector<S1, R1>, Selector<S2, R2>, Selector<S3, R3>],
   combiner: (res1: R1, res2: R2, res3: R3) => T,
 ): OutputSelector<S1 & S2 & S3, T>;
+
+export function createSelector<S1, S2, S3, P1, P2, P3, R1, R2, R3, T>(
+  selectors: [ParametricInstanceSelector<S1, P1, R1>, MaybeParametricInstanceSelector<S2, P2, R2>, MaybeParametricInstanceSelector<S3, P3, R3>],
+  combiner: (res1: R1, res2: R2, res3: R3) => T,
+): OutputParametricInstanceSelector<S1 & S2 & S3, P1 & P2 & P3, T>;
+export function createSelector<S1, S2, S3, P1, P2, P3, R1, R2, R3, T>(
+  selectors: [MaybeParametricInstanceSelector<S1, P1, R1>, ParametricInstanceSelector<S2, P2, R2>, MaybeParametricInstanceSelector<S3, P3, R3>],
+  combiner: (res1: R1, res2: R2, res3: R3) => T,
+): OutputParametricInstanceSelector<S1 & S2 & S3, P1 & P2 & P3, T>;
+export function createSelector<S1, S2, S3, P1, P2, P3, R1, R2, R3, T>(
+  selectors: [MaybeParametricInstanceSelector<S1, P1, R1>, MaybeParametricInstanceSelector<S2, P2, R2>, ParametricInstanceSelector<S3, P3, R3>],
+  combiner: (res1: R1, res2: R2, res3: R3) => T,
+): OutputParametricInstanceSelector<S1 & S2 & S3, P1 & P2 & P3, T>;
+
 export function createSelector<S1, S2, S3, P1, P2, P3, R1, R2, R3, T>(
   selectors: [ParametricSelector<S1, P1, R1>, ParametricSelector<S2, P2, R2>, ParametricSelector<S3, P3, R3>],
   combiner: (res1: R1, res2: R2, res3: R3) => T,
@@ -246,6 +302,10 @@ export function createSelector<S, P, R, T>(
   selectors: ParametricSelector<S, P, R>[],
   combiner: (...res: R[]) => T,
 ): OutputParametricSelector<S, P, T>;
+
+////////////////////////////////
+/// createStructuredSelector ///
+////////////////////////////////
 
 export function createStructuredSelector<S, T>(
   selectors: {[K in keyof T]: InstanceSelector<S, T[K]>},
