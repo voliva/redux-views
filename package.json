@@ -31,6 +31,7 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "test:cov": "npm test -- --coverage",
+    "test:types": "dtslint types",
     "build": "rollup -c",
     "prepare": "npm run clean && npm run format:check && npm run lint && npm test"
   },
@@ -50,6 +51,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.0.0",
     "cross-env": "^5.2.0",
+    "dtslint": "^0.5.3",
     "eslint": "^5.12.1",
     "eslint-config-react-app": "^3.0.6",
     "eslint-plugin-flowtype": "^3.2.1",
