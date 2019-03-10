@@ -1,4 +1,4 @@
-// TypeScript Version: 3.0
+// TypeScript Version: 3.2
 
 export type Selector<S, R> = (state: S) => R;
 export type ParametricSelector<S, P, R> = (state: S, props: P, ...args: any[]) => R;

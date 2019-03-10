@@ -44,8 +44,48 @@ const getSelectedContact = contactSelectorFactory(getSelectedContactId);
 // $ExpectType ParametricInstanceSelector<State, PropsA, Contact>
 const getContactById = contactSelectorFactory(getContactId);
 
-// $ExpectType OutputSelector<{}, {}>
+/// createSelector - homogenous
+const areEqual = <T>(a: T, b: T) => a === b;
+
+// $ExpectType OutputSelector<State, boolean>
 createSelector(
-  state => state,
-  state => state
+  getSelectedContactId,
+  getSelectedContactId,
+  areEqual
+);
+
+// $ExpectType OutputParametricSelector<State, PropsA, boolean>
+createSelector(
+  getSelectedContactId,
+  getContactId,
+  areEqual
+);
+
+// $ExpectType OutputInstanceSelector<State, boolean>
+createSelector(
+  getSelectedContactId,
+  selectedContactIdSelector,
+  areEqual
+);
+
+// $ExpectType OutputInstanceSelector<State, boolean>
+createSelector(
+  selectedContactIdSelector,
+  getSelectedContactId,
+  areEqual
+);
+
+// Fails for TS3.1 or less, because contactIdSelector takes `unknown` and heterogenous types are too far behind.
+// $ExpectType OutputParametricInstanceSelector<State, PropsA, boolean>
+createSelector(
+  getSelectedContactId,
+  contactIdSelector,
+  areEqual
+);
+
+// $ExpectType OutputParametricInstanceSelector<State, PropsA, boolean>
+createSelector(
+  selectedContactIdSelector,
+  getContactId,
+  areEqual
 );
