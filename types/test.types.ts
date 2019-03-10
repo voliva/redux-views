@@ -19,7 +19,15 @@ export interface State {
 export interface PropsA {
   contactId: string;
 }
+export interface PropsB {
+  companyId: string;
+}
 
 export const getContactId = (_: unknown, { contactId }: PropsA) => contactId;
-export const getSelectedContactId = ({ selectedContact }: State) => selectedContact;
-export const getContacts = ({ contacts }: State) => contacts;
+export const getSelectedContactId = ({ selectedContact }: { selectedContact: State['selectedContact'] }) => selectedContact;
+export const getContacts = ({ contacts }: { contacts: State['contacts'] }) => contacts;
+
+export const getCompanyId = (_: unknown, { companyId }: PropsB) => companyId;
+export const getCompanies = ({ companies }: { companies: State['companies'] }) => companies;
+
+export const state: State = null as any;

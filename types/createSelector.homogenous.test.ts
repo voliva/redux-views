@@ -4,28 +4,28 @@ import { selectedContactIdSelector, contactIdSelector } from "./createKeySelecto
 
 const areEqual = <T>(a: T, b: T) => a === b;
 
-// $ExpectType OutputSelector<State, boolean>
+// $ExpectType OutputSelector<{ selectedContact: string; }, boolean>
 createSelector(
   getSelectedContactId,
   getSelectedContactId,
   areEqual
 );
 
-// $ExpectType OutputParametricSelector<State, PropsA, boolean>
+// $ExpectType OutputParametricSelector<{ selectedContact: string; }, PropsA, boolean>
 createSelector(
   getSelectedContactId,
   getContactId,
   areEqual
 );
 
-// $ExpectType OutputInstanceSelector<State, boolean>
+// $ExpectType OutputInstanceSelector<{ selectedContact: string; }, boolean>
 createSelector(
   getSelectedContactId,
   selectedContactIdSelector,
   areEqual
 );
 
-// $ExpectType OutputInstanceSelector<State, boolean>
+// $ExpectType OutputInstanceSelector<{ selectedContact: string; }, boolean>
 createSelector(
   selectedContactIdSelector,
   getSelectedContactId,
@@ -33,14 +33,14 @@ createSelector(
 );
 
 // Fails for TS3.1 or less, because contactIdSelector takes `unknown` and heterogenous types are too far behind.
-// $ExpectType OutputParametricInstanceSelector<State, PropsA, boolean>
+// $ExpectType OutputParametricInstanceSelector<{ selectedContact: string; }, PropsA, boolean>
 createSelector(
   getSelectedContactId,
   contactIdSelector,
   areEqual
 );
 
-// $ExpectType OutputParametricInstanceSelector<State, PropsA, boolean>
+// $ExpectType OutputParametricInstanceSelector<{ selectedContact: string; }, PropsA, boolean>
 createSelector(
   selectedContactIdSelector,
   getContactId,
