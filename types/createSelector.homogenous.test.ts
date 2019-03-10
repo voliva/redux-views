@@ -32,7 +32,6 @@ createSelector(
   areEqual
 );
 
-// Fails for TS3.1 or less, because contactIdSelector takes `unknown` and heterogenous types are too far behind.
 // $ExpectType OutputParametricInstanceSelector<{ selectedContact: string; }, PropsA, boolean>
 createSelector(
   getSelectedContactId,
